@@ -3,25 +3,29 @@ import quote from '../../../assets/icons/quote.svg'
 import person1 from '../../../assets/images/people1.png'
 import person2 from '../../../assets/images/people2.png'
 import person3 from '../../../assets/images/people3.png'
+import Review from '../Review/Review';
 
 const Testimonials = () => {
     const reviews = [
         {
             _id: 1,
             name: 'Windson Harry',
-            review: 'forever grateful',
+            review: 'Just awesome',
+            location: 'los angeles',
             img: person1
         },
         {
             _id: 2,
-            name: 'Peter Parker',
-            review: 'good service',
+            name: 'Wanda',
+            review: 'Great service, now I will be a Mom',
+            location: 'los angeles',
             img: person2
         },
         {
             _id: 3,
-            name: 'Tony Stark',
-            review: 'got healed fast',
+            name: 'Skyler',
+            review: 'I want to talk to the manager!',
+            location: 'los angeles',
             img: person3
         }
     ]
@@ -34,8 +38,8 @@ const Testimonials = () => {
                 </div>
                 <div><img className='lg:w-48 w-24' src={quote} alt="" /></div>
             </div>
-            <div>
-
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
+                {reviews.map(review => <Review key={review._id} review={review}></Review>)}
             </div>
         </div>
     );
