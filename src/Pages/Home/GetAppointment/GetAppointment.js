@@ -12,9 +12,9 @@ const GetAppointment = () => {
                 <img className='mt-[-100px]' src={doctor} alt="" />
             </div>
             <div className='flex-1'>
-                <h2 className='text-primary text-xl font-bold'>Appointment</h2>
-                <h3 className='text-white text-3xl'>Make an Appointment Today</h3>
-                <p className='text-white font-thin'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis aspernatur ex animi aut iusto, vitae tenetur? Asperiores reprehenderit, doloremque nemo quo officiis nisi rem fugit illo perspiciatis repellat saepe!</p>
+                <h2 className='text-primary text-xl font-bold mb-2'>Appointment</h2>
+                <h3 className='text-white text-3xl mb-4'>Make an Appointment Today</h3>
+                <p className='text-white font-thin mb-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis aspernatur ex animi aut iusto, vitae tenetur? Asperiores reprehenderit, doloremque nemo quo officiis nisi rem fugit illo perspiciatis repellat saepe!</p>
                 <PrimaryButton>Get Started</PrimaryButton>
             </div>
         </div>
