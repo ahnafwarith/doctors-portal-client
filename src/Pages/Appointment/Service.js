@@ -17,6 +17,7 @@ const Service = ({ service }) => {
                 }</p>
                 <div class="card-actions justify-center mt-2">
                     <button disabled={slots.length === 0} class="btn btn-primary text-white uppercase">Book Appointment</button>
+
                 </div>
             </div>
         </div>
