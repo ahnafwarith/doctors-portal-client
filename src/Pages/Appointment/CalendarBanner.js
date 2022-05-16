@@ -4,8 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 
-const CalendarBanner = () => {
-    const [date, setDate] = useState(new Date())
+const CalendarBanner = ({ date, setDate }) => {
     return (
         <div class="hero min-h-screen">
             <div class="hero-content flex-col lg:flex-row-reverse">
