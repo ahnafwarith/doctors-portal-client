@@ -7,7 +7,7 @@ const GetAppointment = () => {
     return (
         <div style={{
             background: `url(${appointment})`
-        }} className='flex justify-center items-center my-24'>
+        }} className='flex justify-center items-center my-24 p-4 md:p-0 lg:p-0'>
             <div className='flex-1 hidden lg:block md:block'>
                 <img className='mt-[-100px]' src={doctor} alt="" />
             </div>

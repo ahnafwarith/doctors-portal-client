@@ -9,7 +9,7 @@ const Testimonials = () => {
     const reviews = [
         {
             _id: 1,
-            name: 'Windson Harry',
+            name: 'Harry',
             review: 'Just awesome',
             location: 'los angeles',
             img: person1
@@ -34,7 +34,7 @@ const Testimonials = () => {
             <div className='flex justify-between'>
                 <div>
                     <h4 className="text-xl text-primary font-bold">Testimonials</h4>
-                    <h2>What our Patients say</h2>
+                    <h2 className='text-3xl font-bold'>What our Patients say</h2>
                 </div>
                 <div><img className='lg:w-48 w-24' src={quote} alt="" /></div>
             </div>
