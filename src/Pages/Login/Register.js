@@ -1,9 +1,10 @@
 import React from 'react';
 import auth from '../../firebase.init';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading/Loading"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
     const [signInWithGoogle, userG, loadingG, errorG] = useSignInWithGoogle(auth);
@@ -13,23 +14,32 @@ const Register = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-    let errorMsg;
-    if (error || errorG) {
-        errorMsg = <p className='text-red-500'>Error: {error?.message || errorG?.message}</p>
-    }
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const onSubmit = data => {
-        console.log(data);
-        createUserWithEmailAndPassword(data.email, data.password)
+    const [updateProfile, updating, upError] = useUpdateProfile(auth);
+    let errorMsg;
+    if (error || errorG || upError) {
+        errorMsg = <p className='text-red-500'>Error: {error?.message || errorG?.message || upError?.message}</p>
     }
 
-    if (loading || loadingG) {
+    // navigate
+    const navigate = useNavigate();
+
+    const onSubmit = async data => {
+        console.log(data);
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name });
+        toast.success('Updated profile');
+    }
+
+    if (loading || loadingG || updating) {
         return <Loading></Loading>
     }
 
     if (userG || user) {
-        console.log(userG || user)
+        navigate('/appointment')
+        toast.success('Account creation successful!');
     }
 
     return (
@@ -118,6 +128,7 @@ const Register = () => {
                     >Sign In With Google</button>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };
