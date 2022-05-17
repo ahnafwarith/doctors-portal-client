@@ -19,32 +19,55 @@ const Login = () => {
                 <div className="card-body">
                     <h2 className="font-bold text-center text-2xl">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        {/* Email validation*/}
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Email</span>
                             </label>
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="Enter your email"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
                                 {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: 'Email is a required field'
+                                    },
                                     pattern: {
-                                        value: /[A-Za-z]{3}/,
-                                        message: 'error message' // JS only: <p>error message</p> TS only support string
+                                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                        message: 'Please provide an valid email address'
                                     }
                                 })} />
-                            <label class="label">
-                                <span class="label-text-alt">Alt label</span>
+                            <label className="label">
+                                {errors.email?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className='label-text-alt text-red-500'>{errors.email.message}</span>}
                             </label>
                         </div>
-
-                        <input {...register("firstName", { required: true })} />
-                        {errors.firstName?.type === 'required' && "First name is required"}
-
-                        <input {...register("lastName", { required: true })} />
-                        {errors.lastName && "Last name is required"}
-
-                        <input type="submit" />
+                        {/* Password validation */}
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input
+                                type="password"
+                                placeholder="Enter your password"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("password", {
+                                    required: {
+                                        value: true,
+                                        message: 'Password is a required field'
+                                    },
+                                    minLength: {
+                                        value: 6,
+                                        message: "Password must be at least 6 characters"
+                                    }
+                                })} />
+                            <label className="label">
+                                {errors.password?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.password.message}</span>}
+                                {errors.password?.type === 'minLength' && <span className='label-text-alt text-red-500'>{errors.password.message}</span>}
+                            </label>
+                        </div>
+                        <input className='btn w-full max-w-xs' type="submit" value="login" />
                     </form>
                     <div className='divider'>Or</div>
                     <button
