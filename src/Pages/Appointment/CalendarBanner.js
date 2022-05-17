@@ -6,8 +6,8 @@ import { format } from 'date-fns';
 
 const CalendarBanner = ({ date, setDate }) => {
     return (
-        <div class="hero min-h-screen">
-            <div class="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero min-h-screen">
+            <div className="hero-content flex-col lg:flex-row-reverse">
                 <img className='lg:w-2/4' src={chair} />
                 <div>
                     <DayPicker
