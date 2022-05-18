@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading/Loading"
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
     const [signInWithGoogle, userG, loadingG, errorG] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
@@ -21,15 +25,23 @@ const Login = () => {
 
     const onSubmit = data => {
         console.log(data);
+        signInWithEmailAndPassword(data.email, data.password)
     }
 
     if (loading || loadingG) {
         return <Loading></Loading>
     }
 
-    if (userG) {
-        console.log(userG)
+    // As not working(correct)
+    if (userG || user) {
+        navigate(from, { replace: true });
     }
+    /* Why not working? */
+    // useEffect(() => {
+    //     if (userG || user) {
+    //         navigate(from, { replace: true });
+    //     }
+    // }, [user, userG, navigate, from])
 
     return (
         <div className='flex justify-center h-screen items-center'>
