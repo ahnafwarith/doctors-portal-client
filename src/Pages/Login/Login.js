@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading/Loading"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../CustomHooks/useToken';
 
 const Login = () => {
     let navigate = useNavigate();
@@ -17,14 +18,18 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    // getting token
+    const [token] = useToken(user || userG)
+
     let errorMsg;
     if (error || errorG) {
         errorMsg = <p className='text-red-500'>Error: {error?.message || errorG?.message}</p>
     }
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
         signInWithEmailAndPassword(data.email, data.password)
     }
 
@@ -33,7 +38,7 @@ const Login = () => {
     }
 
     // As not working(correct)
-    if (userG || user) {
+    if (token) {
         navigate(from, { replace: true });
     }
     /* Why not working? */

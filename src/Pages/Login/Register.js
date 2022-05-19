@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading/Loading"
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import useToken from '../../CustomHooks/useToken';
 
 const Register = () => {
     const [signInWithGoogle, userG, loadingG, errorG] = useSignInWithGoogle(auth);
@@ -14,6 +15,9 @@ const Register = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+
+    // getting user email with useToken
+    const [token] = useToken(user || userG);
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
@@ -27,19 +31,17 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = async data => {
-        console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name });
-        toast.success('Updated profile');
+        toast.success('Profile creation successful')
     }
 
     if (loading || loadingG || updating) {
         return <Loading></Loading>
     }
 
-    if (userG || user) {
+    if (token) {
         navigate('/appointment')
-        toast.success('Account creation successful!');
     }
 
     return (
