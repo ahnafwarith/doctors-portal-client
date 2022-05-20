@@ -33,20 +33,21 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password)
     }
 
+    // As not working(correct)
+    // if (token) {
+    //     navigate(from, { replace: true });
+    // }
+    console.log(token)
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, navigate, from])
+
     if (loading || loadingG) {
         return <Loading></Loading>
     }
-
-    // As not working(correct)
-    if (token) {
-        navigate(from, { replace: true });
-    }
-    /* Why not working? */
-    // useEffect(() => {
-    //     if (userG || user) {
-    //         navigate(from, { replace: true });
-    //     }
-    // }, [user, userG, navigate, from])
 
     return (
         <div className='flex justify-center h-screen items-center'>
