@@ -17,8 +17,8 @@ const AllUsers = () => {
         <div>
             <h2 className='text-2xl text-black bg-gray-200 rounded-b-lg
             h-10 mb-4 flex justify-center items-center'>All Users</h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>

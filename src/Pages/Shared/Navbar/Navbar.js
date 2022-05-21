@@ -44,7 +44,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className='navbar-end'>
-                <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">DashBoard</label>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">DashBoard</label>
             </div>
         </div>
     );

@@ -16,6 +16,8 @@ import MyReview from './Pages/Dashboard/MyReview';
 import MyHistory from './Pages/Dashboard/MyHistory';
 import AllUsers from './Pages/Dashboard/AllUsers';
 import RequireAdmin from './Pages/Login/RequireAdmin';
+import AddDoctor from './Pages/Dashboard/AddDoctor';
+import ManageDoctors from './Pages/Dashboard/ManageDoctors';
 
 function App() {
   return (
@@ -37,6 +39,10 @@ function App() {
           <Route path='history' element={<MyHistory />}></Route>
           <Route path='users' element={
             <RequireAdmin><AllUsers /></RequireAdmin>}></Route>
+          <Route path='addDoctor' element={
+            <RequireAdmin><AddDoctor /> </RequireAdmin>}></Route>
+          <Route path='manageDoctors' element={
+            <RequireAdmin><ManageDoctors /> </RequireAdmin>}></Route>
         </Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>

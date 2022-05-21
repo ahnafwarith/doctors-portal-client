@@ -19,7 +19,6 @@ const MyAppointment = () => {
                 }
             })
                 .then(res => {
-                    console.log(res)
                     if (res.status === 401 || res.status === 403) {
                         navigate('/')
                         signOut(auth)
@@ -35,8 +34,8 @@ const MyAppointment = () => {
     }, [user]);
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>
