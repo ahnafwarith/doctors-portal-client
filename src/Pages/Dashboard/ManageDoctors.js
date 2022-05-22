@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import BookingModal from '../Appointment/BookingModal';
 import Loading from '../Shared/Loading/Loading';
 import DoctorRow from './DoctorRow';
 
 const ManageDoctors = () => {
+    const [doctorDelete, setDoctorDelete] = useState(null);
+
     const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('http://localhost:4000/doctors', {
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -28,11 +31,25 @@ const ManageDoctors = () => {
                     </thead>
                     <tbody>
                         {
-                            doctors.map((doctor, index) => <DoctorRow key={doctor._id} doctor={doctor} index={index} refetch={refetch}></DoctorRow>)
+                            doctors.map((doctor, index) =>
+                                <DoctorRow
+                                    key={doctor._id}
+                                    doctor={doctor}
+                                    index={index}
+                                    refetch={refetch}
+                                    setDoctorDelete={setDoctorDelete}>
+                                </DoctorRow>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                doctorDelete && <BookingModal
+                    doctorDelete={doctorDelete}
+                    setDoctorDelete={setDoctorDelete}
+                    refetch={refetch}
+                ></BookingModal>
+            }
         </div>
     );
 };
