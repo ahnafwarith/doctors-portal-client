@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import BookingModal from '../Appointment/BookingModal';
 import Loading from '../Shared/Loading/Loading';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import DoctorRow from './DoctorRow';
 
 const ManageDoctors = () => {
@@ -44,11 +45,11 @@ const ManageDoctors = () => {
                 </table>
             </div>
             {
-                doctorDelete && <BookingModal
+                doctorDelete && <DeleteConfirmationModal
                     doctorDelete={doctorDelete}
                     setDoctorDelete={setDoctorDelete}
                     refetch={refetch}
-                ></BookingModal>
+                ></DeleteConfirmationModal>
             }
         </div>
     );
